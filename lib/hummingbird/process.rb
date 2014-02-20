@@ -7,7 +7,9 @@ module Hummingbird
       end
 
       def self.init(klass,name)
-        Rails.logger.debug "Hummingbird #{self} for #{klass} #{name}"
+        if defined? Rails
+          Rails.logger.debug "Hummingbird #{self} for #{klass} #{name}"
+        end
       end
 
       def add(type=nil,point=0)
