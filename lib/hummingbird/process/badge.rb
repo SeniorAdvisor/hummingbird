@@ -3,7 +3,10 @@ module Hummingbird
     class Badge < Base
       def self.init(klass,name)
         super(klass,name)
-        ActiveRecord::Associations::Builder::HasMany.build(klass,"hummingbird_#{name}_badges".to_sym,  -> {where(["owner_class = ? and owner_type = ?",klass.name,name.to_s])}, :class_name => "Hummingbird::Level", :foreign_key => "owner_id")
+        klass.class_eval do
+          has_many  "hummingbird_#{name}_badges".to_sym, -> {where(["owner_class = ? and owner_type = ?",klass.name,name.to_s])}, :class_name => "Hummingbird::Level", :foreign_key => "owner_id"
+        end
+        #ActiveRecord::Associations::Builder::HasMany.build(klass,"hummingbird_#{name}_badges".to_sym,  -> {where(["owner_class = ? and owner_type = ?",klass.name,name.to_s])}, :class_name => "Hummingbird::Level", :foreign_key => "owner_id")
       end
 
       def value
