@@ -18,7 +18,13 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Adding macro method in ActiveRecord
+```ruby
+class User < ActiveRecord::Base
+  hummingbird :points , :processes => [:logs,:total,:badge]
+end
+```
+
 
 ## Contributing
 
